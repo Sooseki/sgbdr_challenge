@@ -16,6 +16,17 @@ before insert
 on user for each row set new.email = lower(trim(new.email));
 
 
+/* file */
+create table if not exists user_file (
+  fileId int auto_increment not null,
+  userId int not null,
+  storageKey varchar(512) not null,
+  filename varchar(256),
+  mimeType varchar(256),
+  primary key(fileId),
+  foreign key(userId) references user(userId) on delete cascade
+);
+
 /* exemple */
 create table if not exists film (
   filmId int auto_increment not null,

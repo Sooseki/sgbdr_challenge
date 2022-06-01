@@ -12,6 +12,8 @@ Cette fois-ci, on a amélioré le `Dockerfile.dev` afin de préinstaller quelque
 
 [Regardez Dockerfile.dev](./Dockerfile.dev)
 
+> A noter : je remplace `/etc/apt/sources.list` dans l'image par une version local dans [config/sources.list](../../config/sources.list). Ceci pour forcer notre image à utiliser les miroirs français, et éviter une erreur "Forbidden" dans l'utilisation de `apt` en construisant l'image.
+
 On a aussi configuré intelligemment la base de données pour s'initialiser tout seul. Dans [`docker-compose.dev.yml`](./docker-compose.dev.yml) on a ajouté 2 volumes supplémentaires qui pointent vers le dossier `/docker-entrypoint-initdb.d/`. A sa première initialisation, MariaDB va executer les scripts qui se trouve dans ce dossier dans l'ordre alphabétique. Dans notre cas:  
 1. mariadb va se lancer avec les paramètres de notre fichier [`.env.dev`](./dbms/.env.dev). Attention, nous avons ajouté la variable `MYSQL_DATABASE=mtdb` pour préciser la base par défaut à utiliser pour les scripts d'initialisation.
 2. nous commençons par créer la base et un utilisateur [`dbms/dev-initdb.d/001-init-dev.sql`](./dbms/dev-initdb.d/001-init-dev.sql)

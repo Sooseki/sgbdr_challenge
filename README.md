@@ -33,3 +33,6 @@ L'API est accessible à l'adresse : `http://localhost:5050`.
 ## Explications
 
 1. [Setup du projet et factorisation](./documentation/001-factorisation/README.md)
+1. [Ajouter de la documentation](./documentation/002-documentation/README.md)
+3. [Téléchargement des fichiers](./documentation/003-fileuploads/README.md)
+4. [Preparation de déploiement et logging](./documentation/004-deploymentlogging/README.md)

@@ -5,11 +5,11 @@ export interface IIndexQuery {
   /**
    * Le numéro de page (zéro-index), donc 0 = la première page, 1 = la deuxième page, etc.
    */
-  page?: string;
+  page?: number;
   /**
    * Le nombre de lignes à retourner, attention, Le default = 10, mais limité à 50.
    */
-  limit?: string;  
+  limit?: number;  
 }
 
 export type IReadWhere = Record<string, string|number>;

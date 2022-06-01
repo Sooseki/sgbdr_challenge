@@ -1,11 +1,16 @@
 
-// Définition d'un structure IUser
-// A noter, le ? veut dire que le champ est optionnel
 
+/**
+ * Un utilisateur de la plateforme.
+ */
 export interface IUser {
+  /** ID Unique */
   userId: number;
+  /** Nom de famille */
   familyName?: string;
+  /** Prénom */
   givenName?: string;
+  /** Adress e-mail, ceci doit être unique est sera utilisé comme identifiant pour l'utilisateur */
   email: string;
 }
 

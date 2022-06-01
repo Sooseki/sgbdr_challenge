@@ -32,9 +32,9 @@ export class Crud {
     const db = DB.Connection;      
     // On suppose que le params query sont en format string, et potentiellement
     // non-numérique, ou corrompu
-    const page = parseInt(query.page || "0") || 0;
+    const page = Math.max(query.page || 0, 0);
     // Toujours limiter la tailles des pages à 50 lignes
-    const limit = Math.min(parseInt(query.limit || "10") || 0, 50);
+    const limit = Math.min(query.limit || 0, 50) || 10;
     const offset = page * limit;
 
     // D'abord, récupérer le nombre total
@@ -94,7 +94,7 @@ export class Crud {
     }
   }
 
-  public static async Delete<T>(table: DbTable, idName: string, idValue: number): Promise<IUpdateResponse> {
+  public static async Delete(table: DbTable, idName: string, idValue: number): Promise<IUpdateResponse> {
     const db = DB.Connection;
     const data = await db.query<OkPacket>(`delete from ${table} where ${idName} = ?`, [idValue]);      
 
