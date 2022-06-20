@@ -9,7 +9,7 @@ export type StructuredErrors =
   // Authorization
   'auth/missing-header' |
   'auth/unknown-email' |
-
+  'auth/jwt' |
   // Files
   'object/invalid-multipart' |
   'object/error-transmitting' |

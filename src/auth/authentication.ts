@@ -1,6 +1,12 @@
 import { Request } from 'express';
 import { ApiError } from '../classes/Errors/ApiError';
 import { ErrorCode } from '../classes/Errors/ErrorCode';
+import {readFileSync} from 'fs';
+
+const  decode = require('jsonwebtoken');
+const jwt = require ("jsonwebtoken");
+const privateKey = readFileSync('./config/id_rsa');
+console.log(privateKey);
 
 export async function expressAuthentication(
   request: Request,
@@ -12,8 +18,21 @@ export async function expressAuthentication(
     if (!request.headers.authorization) {
       throw new ApiError(ErrorCode.Unauthorized, 'auth/missing-header', 'Missing authorization header');
     }
-    // TODO: Ajoutez votre propre logique de validation JWT
+    
+    // Check if jwt is valid
+    // const idToken = request.headers.authorization;
+    // return new Promise<boolean>((resolve, reject) => {
+    //   jwt.verify(idToken, publicKey, (error)=> {
+    //     if(error){
+    //        reject(new ApiError(ErrorCode.Unauthorized, "auth/jwt","Erreur d'indentification"))
+    //     }else{
+    //         req.userToken = decoded
+    //         resolve(true);
+    //     }
+    //   })
+    // })
 
+   
   }
 
   return true;
