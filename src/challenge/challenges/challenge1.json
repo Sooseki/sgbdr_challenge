@@ -1,0 +1,15 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "points": 1,
+      "name": "bla bla",
+      "clue": "bla bla"
+    },
+    {
+      "id": 2,
+      "points": 2,
+      "name": "bla bla"
+    }
+  ]
+}
