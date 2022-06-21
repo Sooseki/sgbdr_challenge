@@ -1,11 +1,11 @@
-import { Body, Delete, Get, Path, Post, Put, Query, Route, Security } from 'tsoa';
+import { Body, Post, Route } from 'tsoa';
 import { Crud } from '../../classes/Crud';
 import { ICreateResponse } from '../../types/api/ICreateResponse';
 import { IIndexResponse } from '../../types/api/IIndexQuery';
 import { IUpdateResponse } from '../../types/api/IUpdateResponse';
-import { IUser, IUserCreate, IUserUpdate } from '../../types/tables/user/IUser';
+import {IUserCreate } from '../../types/tables/user/IUser';
 
-@Route("/auth/:prom/:challenge")
+@Route("/auth/test/:prom/:challenge")
 
 
 export class CreateController {
