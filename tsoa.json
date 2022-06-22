@@ -16,7 +16,7 @@
     "specMerging": "recursive",
     "spec": {
       "paths": {
-        "/auth/user/{id_student}/file": {
+        "/auth/student/{id_student}/file": {
           "post": {
             "requestBody": {
               "content": {

@@ -8,4 +8,4 @@ export interface IFilm {
 
 export type IFilmCreate = Omit<IFilm, 'filmId'>;
 export type IFilmUpdate = Partial<IFilmCreate>;
-export type IFilmRO = Readonly<IUser>;
+export type IFilmRO = Readonly<IStudent>;

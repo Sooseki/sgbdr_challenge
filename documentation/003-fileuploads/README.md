@@ -58,11 +58,11 @@ npm install @aws-sdk
 
 On va servir de cet outil pour uploader et downloader des fichiers pour notre utilisateur.
 
-[UserFileUploadController](../../src/routes/auth/UserFileUploadController.ts)
+[StudentFileUploadController](../../src/routes/auth/StudentFileUploadController.ts)
 
 A noter :
 * La librairie [`multer`](https://www.npmjs.com/package/multer) pour la gestion des requêtes multi-part contenant des fichiers
 * La création d'une clé unique et l'envoie au serveur
-* L'utilisation d'une nouvelle table `user_file` pour stocker les références vers les fichiers dans le Object Storage
+* L'utilisation d'une nouvelle table `student_file` pour stocker les références vers les fichiers dans le Object Storage
 * La récupération et stream vers le client avec le chunks
 * La documentation personnalisé avec [tsoa.json](../../tsoa.json)

@@ -19,6 +19,6 @@
 // }).connect({
 //   host: '212.47.249.198',
 //   port: 22,
-//   username: 'challenge',
+//   studentname: 'challenge',
 //   privateKey: readFileSync('./config/id_rsa')
 // });

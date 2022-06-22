@@ -3,7 +3,7 @@ import { Crud } from '../../classes/Crud';
 import { ICreateResponse } from '../../types/api/ICreateResponse';
 import { IIndexResponse } from '../../types/api/IIndexQuery';
 import { IUpdateResponse } from '../../types/api/IUpdateResponse';
-import {IUserCreate } from '../../types/tables/user/IUser';
+import {IStudentCreate } from '../../types/tables/student/IStudent';
 
 
 @Route("/register/:prom/:challenge")
@@ -14,10 +14,10 @@ export class CreateController {
    * Créer un nouvel utilisateur
    */
   @Post()
-  public async createUser(
+  public async createStudent(
     
-    @Body() body: IUserCreate
+    @Body() body: IStudentCreate
   ): Promise<ICreateResponse> {
-    return Crud.Create<IUserCreate>(body, 'user');
+    return Crud.Create<IStudentCreate>(body, 'student');
   }
 }
