@@ -8,14 +8,14 @@ import { IStudent, IStudentCreate, IStudentUpdate } from '../../types/tables/stu
 const READ_COLUMNS = ['id_student', 'name_student', 'first_name_student', 'email_student'];
 
 /**
- * Un utilisateur de la plateforme.s
+ * Un étudiant  de la plateforme.s
  */
 @Route("/auth/student")
 @Security('jwt')
 export class StudentController {
 
   /**
-   * Récupérer une page d'utilisateurs.
+   * Récupérer une page d'étudiant s.
    */
   @Get()
   public async getStudents(
@@ -28,7 +28,7 @@ export class StudentController {
   }
 
   /**
-   * Créer un nouvel utilisateur
+   * Créer un nouvel étudiant 
    */
   @Post()
   public async createStudent(
@@ -38,7 +38,7 @@ export class StudentController {
   }
 
   /**
-   * Récupérer une utilisateur avec le ID passé dans le URL
+   * Récupérer une étudiant  avec le ID passé dans le URL
    */
   @Get('{id_student}')
   public async readStudent(
@@ -48,7 +48,7 @@ export class StudentController {
   }
 
   /**
-   * Mettre à jour un utilisateur avec le ID passé dans le URL
+   * Mettre à jour un étudiant  avec le ID passé dans le URL
    */
   @Put('{id_student}')
   public async updateStudent(
@@ -59,7 +59,7 @@ export class StudentController {
   }
   
   /**
-   * Supprimer un utilisateur
+   * Supprimer un étudiant 
    */
   @Delete('{id_student}')
   public async deleteStudent(

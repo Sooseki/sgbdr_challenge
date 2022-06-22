@@ -21,7 +21,7 @@ const StudentUpdateSchema : JSONSchemaType<IStudentUpdate> = {
   properties: {
     name_student: { type: 'string', nullable: true },
     first_name_student: { type: 'string', nullable: true },
-    email_student: { type: 'string', nullable: true },  
+    email_student: { type: 'string', nullable: true },
     id_prom: {type:'number', nullable: true}
   },  
   additionalProperties: false,
