@@ -1,5 +1,5 @@
-import { Connection, createConnection } from 'mysql2/promise';
 import { readFileSync } from 'fs';
+import { Connection, createConnection } from 'mysql2/promise';
 import { Client } from 'ssh2';
 import tunnel from 'tunnel-ssh';
 
@@ -7,10 +7,13 @@ export class SSH {
 
   protected static conn: Client = new Client();
   protected static result: any;
+  protected static stream: any;
+  protected static connection: Connection;
+  protected static tnl: any;
 
-  static async Connect (ipAddress: string, userName: string, port: number, queries: string[]) {
+  static async Connect (ipAddress: string, userName: string, port: number) {
 
-    new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
 
       const tunnelConfig = {
         host: ipAddress,
@@ -21,7 +24,12 @@ export class SSH {
 
       const server = tunnel(tunnelConfig, (error: any, tnl: any) => {
 
-        if (error) reject(error);
+        this.tnl = tnl;
+
+        if (error) {
+          reject(error);
+          this.tnl.close();
+        };
 
         this.conn.connect({
           host: ipAddress,
@@ -31,7 +39,6 @@ export class SSH {
         });
 
         this.conn.on('ready', () => {
-          console.log('Client :: ready');
 
           this.conn.forwardOut(
             '127.0.0.1',
@@ -45,19 +52,17 @@ export class SSH {
               stream.on('close', (code: any, signal: any) => {
                 console.log('stream :: close\n', { code });
                 this.conn.end();
-                tnl.close();
+                this.tnl.close();
           
               }).stderr.on('data', (data: any) => {
                 console.log('STDERR: ' + data);
           
               });
 
-              const connection = await this.MysqlConnect(stream);
-              
-              // ADD logic to make requests to mysql 
-              // this.result = await this.MysqlQueries(queries, connection);
+              this.stream = stream;
+              this.connection = await this.MysqlConnect();
 
-              stream.end();
+              resolve(this.connection);
             }
           );
             
@@ -73,28 +78,23 @@ export class SSH {
     })
   }
 
-  static async Close() {
-    this.conn.end();
-  }
-
-  static async MysqlConnect(stream: any) {
-    return await createConnection({
+  static async MysqlConnect() {
+    return createConnection({
       user: 'challenge',
       password: 'challenge',
       database: 'nutrition',
       port: 3306,
-      stream: stream
+      stream: this.stream
     });
   }
 
-  static async MysqlQueries(queries: string[], connection: Connection) {
-    let response: any[] = [];
+  static Close() {
+    this.stream.end();
+    this.conn.end();
+    this.tnl.close();
+  }
 
-    queries.map(query => {
-      const data = connection.query(query);  
-      response.push(data);
-    })
-
-    return response;
+  static getConnection() {
+    return this.connection;
   }
 }

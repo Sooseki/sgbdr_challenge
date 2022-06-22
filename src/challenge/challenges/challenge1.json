@@ -4,12 +4,15 @@
       "id": 1,
       "points": 1,
       "name": "bla bla",
-      "clue": "bla bla"
+      "clue": "bla bla",
+      "query": "SELECT id from Repas"
     },
     {
       "id": 2,
       "points": 2,
-      "name": "bla bla"
+      "name": "bla bla",
+      "clue": "bla bla",
+      "query": "SELECT id from Emotions"
     }
   ]
 }
