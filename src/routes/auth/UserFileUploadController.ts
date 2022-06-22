@@ -16,24 +16,24 @@ import { IIndexResponse } from '../../types/api/IIndexQuery';
 /**
  * Controller pour le téléchargement des fichiers concernant un utilisateur
  */
-@Route("/auth/user/{userId}/file")
+@Route("/auth/user/{id_student}/file")
 @Security('jwt')
 export class UserFileController {
 
   /**
    * Envoyer un fichier
-   * @param userId Le ID de l'utilisateur
+   * @param id_student Le ID de l'utilisateur
    */
   @Post()
   @Middlewares(multer().single("file"))
-  public async uploadFile(@Path() userId: number, @Request() request: express.Request): Promise<ICreateResponse> {
+  public async uploadFile(@Path() id_student: number, @Request() request: express.Request): Promise<ICreateResponse> {
     
     if (!request.file) {
       throw new ApiError(ErrorCode.BadRequest, 'object/invalid-multipart', 'Missing file data in multi-part upload');
     }
 
     const filename = (request.file.filename || request.file.originalname || v4());
-    const storageKey =  `user/${userId}/${filename}`;
+    const storageKey =  `user/${id_student}/${filename}`;
 
     await ObjectStorage.upload(
       request.file.buffer,
@@ -42,7 +42,7 @@ export class UserFileController {
     )
 
     const result = await Crud.Create<IUserFileCreate>({
-      userId,
+      id_student,
       storageKey,
       filename,
       mimeType: request.file.mimetype
@@ -56,13 +56,13 @@ export class UserFileController {
    */
   @Get()
   public async showFiles(
-    @Path() userId: number,
+    @Path() id_student: number,
     /** La page (zéro-index) à récupérer */
     @Query() page?: number,    
     /** Le nombre d'éléments à récupérer (max 50) */
     @Query() limit?: number,    
   ): Promise<IIndexResponse<IUserFile>> {
-    return Crud.Index<IUserFile>({ page, limit }, 'user_file', ['fileId', 'userId', 'storageKey', 'mimeType'], { userId });
+    return Crud.Index<IUserFile>({ page, limit }, 'user_file', ['fileId', 'id_student', 'storageKey', 'mimeType'], { id_student });
   }
 
   /**

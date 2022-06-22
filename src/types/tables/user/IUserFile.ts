@@ -1,6 +1,6 @@
 export interface IUserFile {
   fileId: number;
-  userId: number;
+  id_student: number;
   storageKey: string;
   filename?: string;
   mimeType?: string;

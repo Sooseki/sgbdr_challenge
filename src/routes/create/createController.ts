@@ -5,7 +5,8 @@ import { IIndexResponse } from '../../types/api/IIndexQuery';
 import { IUpdateResponse } from '../../types/api/IUpdateResponse';
 import {IUserCreate } from '../../types/tables/user/IUser';
 
-@Route("/auth/test/:prom/:challenge")
+
+@Route("/register/:prom/:challenge")
 
 
 export class CreateController {
@@ -14,6 +15,7 @@ export class CreateController {
    */
   @Post()
   public async createUser(
+    
     @Body() body: IUserCreate
   ): Promise<ICreateResponse> {
     return Crud.Create<IUserCreate>(body, 'user');

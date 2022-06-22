@@ -8,7 +8,7 @@ export type StructuredErrors =
     
   // Authorization
   'auth/missing-header' |
-  'auth/unknown-email' |
+  'auth/unknown-email_student' |
   'auth/unknown-password' |
   'auth/jwt' |
 

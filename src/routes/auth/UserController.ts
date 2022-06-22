@@ -5,10 +5,10 @@ import { IIndexResponse } from '../../types/api/IIndexQuery';
 import { IUpdateResponse } from '../../types/api/IUpdateResponse';
 import { IUser, IUserCreate, IUserUpdate } from '../../types/tables/user/IUser';
 
-const READ_COLUMNS = ['userId', 'familyName', 'givenName', 'email'];
+const READ_COLUMNS = ['id_student', 'name_student', 'first_name_student', 'email_student'];
 
 /**
- * Un utilisateur de la plateforme.
+ * Un utilisateur de la plateforme.s
  */
 @Route("/auth/user")
 @Security('jwt')
@@ -40,32 +40,32 @@ export class UserController {
   /**
    * Récupérer une utilisateur avec le ID passé dans le URL
    */
-  @Get('{userId}')
+  @Get('{id_student}')
   public async readUser(
-    @Path() userId: number
+    @Path() id_student: number
   ): Promise<IUser> {
-    return Crud.Read<IUser>('user', 'userId', userId, READ_COLUMNS);
+    return Crud.Read<IUser>('user', 'id_student', id_student, READ_COLUMNS);
   }
 
   /**
    * Mettre à jour un utilisateur avec le ID passé dans le URL
    */
-  @Put('{userId}')
+  @Put('{id_student}')
   public async updateUser(
-    @Path() userId: number,
+    @Path() id_student: number,
     @Body() body: IUserUpdate
   ): Promise<IUpdateResponse> {
-    return Crud.Update<IUserUpdate>(body, 'user', 'userId', userId);
+    return Crud.Update<IUserUpdate>(body, 'user', 'id_student', id_student);
   }
   
   /**
    * Supprimer un utilisateur
    */
-  @Delete('{userId}')
+  @Delete('{id_student}')
   public async deleteUser(
-    @Path() userId: number,
+    @Path() id_student: number,
   ): Promise<IUpdateResponse> {
-    return Crud.Delete('user', 'userId', userId);
+    return Crud.Delete('user', 'id_student', id_student);
   }
 
 }
