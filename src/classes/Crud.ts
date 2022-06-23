@@ -27,9 +27,9 @@ export class Crud {
    * @returns IIndexResponse contenant les résultats de la recherche.   
    * @todo Ajouter la possibilité de préciser les colonnes dans la requête ?
    */
-  public static async Index<T>(query: IIndexQuery, table: DbTable, columns: string[], where?: IReadWhere) : Promise<IIndexResponse<T>> {
+  public static async Index<T>(query: IIndexQuery, table: DbTable, columns: string[], where?: IReadWhere): Promise<IIndexResponse<T>> {
 
-    const db = DB.Connection;      
+    const db = DB.Connection;
     // On suppose que le params query sont en format string, et potentiellement
     // non-numérique, ou corrompu
     const page = Math.max(query.page || 0, 0);
@@ -38,8 +38,8 @@ export class Crud {
     const offset = page * limit;
 
     // D'abord, récupérer le nombre total
-    const whereClause = (where ? `where ?`: '');
-    const count = await db.query<ITableCount[] & RowDataPacket[]>(`select count(*) as total from ${table} ${whereClause}`, [where]);      
+    const whereClause = (where ? `where ?` : '');
+    const count = await db.query<ITableCount[] & RowDataPacket[]>(`select count(*) as total from ${table} ${whereClause}`, [where]);
 
     // Récupérer les lignes
     const sqlBase = `select ${columns.join(',')} from ${table} ${whereClause} limit ? offset ?`;
@@ -63,9 +63,9 @@ export class Crud {
 
       return {
         id: data[0].insertId
-      }   
+      }
     } else {
-      throw new ApiError(ErrorCode.BadRequest, 'validation/failed', 'Data did not pass validation', validator.errors);      
+      throw new ApiError(ErrorCode.BadRequest, 'validation/failed', 'Data did not pass validation', validator.errors);
     }
   }
 
@@ -77,15 +77,37 @@ export class Crud {
 
       return {
         rows: data[0].affectedRows
-      }   
+      }
     } else {
-      throw new ApiError(ErrorCode.BadRequest, 'validation/failed', 'Data did not pass validation', validator.errors);      
+      throw new ApiError(ErrorCode.BadRequest, 'validation/failed', 'Data did not pass validation', validator.errors);
     }
   }
 
-  public static async Read<T>(table: DbTable, idName: string, idValue: number, columns: string[]): Promise<T> {
+  public static async Read<T>(
+    table: DbTable,
+    idName: string,
+    idValue: number,
+    columns: string[],
+    joinTables: string[][] | null = null,
+    joinTablesColumns: string[][] | null = null): Promise<T> {
     const db = DB.Connection;
-    const data = await db.query<T[] & RowDataPacket[]>(`select ${columns.join(',')} from ${table} where ${idName} = ?`, [idValue]);      
+
+    let join = '';
+    if (joinTables && joinTablesColumns && joinTables.length == joinTablesColumns.length) {
+
+      for (let i = 0; i < joinTables.length; i++) {
+        join += `INNER JOIN ${joinTables[i][0]} ON ${joinTables[i][0]}.${joinTablesColumns[i][0]} == ${joinTables[i][1]}.${joinTablesColumns[i][1]}`
+        console.log(join + '--------------');
+
+      }
+
+      console.log(join);
+    }
+
+    const data =
+      await db.query<
+        T[] & RowDataPacket[]
+      >(`select ${columns.join(',')} from ${table} ${join} where ${idName} = ?`);
 
     if (data[0].length > 0) {
       return data[0][0];
@@ -96,11 +118,11 @@ export class Crud {
 
   public static async Delete(table: DbTable, idName: string, idValue: number): Promise<IUpdateResponse> {
     const db = DB.Connection;
-    const data = await db.query<OkPacket>(`delete from ${table} where ${idName} = ?`, [idValue]);      
+    const data = await db.query<OkPacket>(`delete from ${table} where ${idName} = ?`, [idValue]);
 
     return {
       rows: data[0].affectedRows
-    }  
+    }
   }
 
 }
