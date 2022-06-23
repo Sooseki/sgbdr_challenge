@@ -3,7 +3,9 @@ type Question = {
   points: number,
   clue: string | null,
   name: string,
-  query: string
+  query: string,
+  check: any[],
+  error: string[]
 };
 
 export class Challenge {
