@@ -80,9 +80,30 @@ export class Crud {
     }
   }
 
-  public static async Read<T>(table: DbTable, idName: string, idValue: number, columns: string[]): Promise<T> {
+  public static async Read<T>(
+    table: DbTable,
+    idName: string,
+    idValue: number,
+    columns: string[],
+    joinTables: string[][] | null = null,
+    joinTablesColumns: string[][] | null = null): Promise<T> {
     const db = DB.Connection;
-    const data = await db.query<T[] & RowDataPacket[]>(`select ${columns.join(',')} from ${table} where ${idName} = ?`, [idValue]);      
+
+    let join = '';
+    if (joinTables && joinTablesColumns && joinTables.length == joinTablesColumns.length) {
+
+      for (let i = 0; i < joinTables.length; i++) {
+        join += ` INNER JOIN ${joinTables[i][0]} ON ${joinTables[i][0]}.${joinTablesColumns[i][0]} == ${joinTables[i][1]}.${joinTablesColumns[i][1]}`
+        console.log(join + '--------------');
+      }
+
+      console.log(join);
+    }
+
+    const data =
+      await db.query<
+        T[] & RowDataPacket[]
+      >(`select ${columns.join(',')} from ${table} ${join} where ${idName} = ?`);
 
     if (data[0].length > 0) {
       return data[0][0];
