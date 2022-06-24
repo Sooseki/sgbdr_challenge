@@ -6,6 +6,7 @@ import { IUpdateResponse } from '../../types/api/IUpdateResponse';
 import {IStudentCreate } from '../../types/tables/student/IStudent';
 import { join } from 'path';
 import { sign } from 'jsonwebtoken';
+
 require("dotenv").config();
 const fs = require('fs');
 const privateKey = fs.readFileSync(join(__dirname, "..", "..", "..",'config',"id_rsa"));
