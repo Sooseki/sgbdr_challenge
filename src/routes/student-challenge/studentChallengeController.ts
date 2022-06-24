@@ -6,6 +6,9 @@ import { IUpdateResponse } from '../../types/api/IUpdateResponse';
 import { IStudentChallenge, IStudentChallengeCreate } from '../../types/tables/student-challenge/IStudentChallenge';
 
 const READ_COLUMNS = ['id_student', 'id_challenge', 'mark_student_challenge'];
+const TEST = ['student_challenge.id_student', 'student_challenge.id_challenge', 'student_challenge.mark_student_challenge', 'name_student'];
+const JOIN_COLUMNS = [['id_challenge', 'id_challenge'], ['id_challenge', 'id_challenge'], ['id_student', 'id_student']];
+const JOIN_TABLES = [['challenge', 'student_challenge'], ['challenge_prom', 'challenge'], ['student', 'student_challenge']];
 
 /**
  * Un étudiant  de la plateforme.s
@@ -23,7 +26,7 @@ export class StudentChallengeController {
     /** Le nombre d'éléments à récupérer (max 50) */
     @Query() limit?: number,    
   ): Promise<IIndexResponse<IStudentChallenge>> {    
-    return Crud.Index<IStudentChallenge>({ page, limit }, 'student_challenge', READ_COLUMNS);
+    return Crud.Index<IStudentChallenge>({ page, limit }, 'student_challenge', TEST, JOIN_TABLES , JOIN_COLUMNS);
   }
 
   /**
@@ -43,7 +46,7 @@ export class StudentChallengeController {
   public async readStudent(
     @Path() id_challenge: number,
   ): Promise<IStudentChallenge> {
-    return Crud.Read<IStudentChallenge>('student_challenge', 'id_challenge',  id_challenge, READ_COLUMNS, [['challenge', 'student_challenge'], ['challenge_prom', 'challenge']],  [['id', 'id_challenge'], ['id_challenge', 'id']]);
+    return Crud.Read<IStudentChallenge>('student_challenge', 'id_challenge',  id_challenge, TEST, JOIN_TABLES ,JOIN_COLUMNS);
   }
 
   /**

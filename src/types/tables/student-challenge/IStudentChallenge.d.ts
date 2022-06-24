@@ -7,6 +7,8 @@
     id_student?: number;
     id_challenge?: number;
     mark_student_challenge ?: number;
+    name_student ?: string;
+    
   }
   
   export type IStudentChallengeCreate = IStudentChallenge;

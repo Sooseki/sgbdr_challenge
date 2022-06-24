@@ -27,7 +27,8 @@ export class Crud {
    * @returns IIndexResponse contenant les résultats de la recherche.   
    * @todo Ajouter la possibilité de préciser les colonnes dans la requête ?
    */
-  public static async Index<T>(query: IIndexQuery, table: DbTable, columns: string[], where?: IReadWhere): Promise<IIndexResponse<T>> {
+  public static async Index<T>(query: IIndexQuery, table: DbTable, columns: string[], joinTables: string[][] | null = null,
+    joinTablesColumns: string[][] | null = null, where?: IReadWhere): Promise<IIndexResponse<T>> {
 
     const db = DB.Connection;
     // On suppose que le params query sont en format string, et potentiellement
@@ -39,12 +40,26 @@ export class Crud {
 
     // D'abord, récupérer le nombre total
     const whereClause = (where ? `where ?` : '');
-    const count = await db.query<ITableCount[] & RowDataPacket[]>(`select count(*) as total from ${table} ${whereClause}`, [where]);
+
+    let join = '';
+    if (joinTables && joinTablesColumns && joinTables.length == joinTablesColumns.length) {
+
+      for (let i = 0; i < joinTables.length; i++) {
+        join += ` INNER JOIN ${joinTables[i][0]} ON ${joinTables[i][0]}.${joinTablesColumns[i][0]} = ${joinTables[i][1]}.${joinTablesColumns[i][1]}`
+
+      }
+    }
+    console.log('---------')
+    console.log(`select ${columns.join(',')} from ${table} ${join} ${whereClause} limit ? offset ?`)
+    console.log('---------')
+    
+    const count = await db.query<ITableCount[] & RowDataPacket[]>(`select count(*) as total from ${table} ${join} ${whereClause}`, [where]);
 
     // Récupérer les lignes
-    const sqlBase = `select ${columns.join(',')} from ${table} ${whereClause} limit ? offset ?`;
+    const sqlBase = `select ${columns.join(',')} from ${table} ${join} ${whereClause} limit ? offset ?`;
+   
     const data = await db.query<T[] & RowDataPacket[]>(sqlBase, [where, limit, offset].filter(e => e !== undefined));
-
+   
     // Construire la réponse
     const res: IIndexResponse<T> = {
       page,
@@ -96,12 +111,9 @@ export class Crud {
     if (joinTables && joinTablesColumns && joinTables.length == joinTablesColumns.length) {
 
       for (let i = 0; i < joinTables.length; i++) {
-        join += `INNER JOIN ${joinTables[i][0]} ON ${joinTables[i][0]}.${joinTablesColumns[i][0]} == ${joinTables[i][1]}.${joinTablesColumns[i][1]}`
-        console.log(join + '--------------');
+        join += ` INNER JOIN ${joinTables[i][0]} ON ${joinTables[i][0]}.${joinTablesColumns[i][0]} == ${joinTables[i][1]}.${joinTablesColumns[i][1]}`
 
       }
-
-      console.log(join);
     }
 
     const data =
