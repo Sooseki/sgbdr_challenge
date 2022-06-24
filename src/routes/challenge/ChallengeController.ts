@@ -4,6 +4,7 @@ import { ICreateResponse } from '../../types/api/ICreateResponse';
 import { IIndexResponse } from '../../types/api/IIndexQuery';
 import { IUpdateResponse } from '../../types/api/IUpdateResponse';
 import { IChallenge, IChallengeCreate, IChallengeUpdate } from '../../types/tables/challenge/IChallenge';
+import { Challenge } from '../../challenge/Challenge';
 
 const READ_COLUMNS = ['id_challenge', 'label_challenge'];
 
@@ -43,8 +44,11 @@ export class ChallengeController {
   @Get('{id_challenge}')
   public async readChallenge(
     @Path() id_challenge: number
-  ): Promise<IChallenge> {
-    return Crud.Read<IChallenge>('challenge', 'id_challenge', id_challenge, READ_COLUMNS);
+  ): Promise<any> {
+    // const idChallenge = Crud.Read<IChallenge>('challenge', 'id_challenge', id_challenge, READ_COLUMNS);
+    
+
+    return Challenge.init(id_challenge); 
   }
 
   /**
