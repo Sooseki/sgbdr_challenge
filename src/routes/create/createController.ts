@@ -22,11 +22,10 @@ export class CreateController {
     
     @Body() body: IStudentCreate
   ): Promise<any> {
-    // if exist (replace ICreateResponse by any)
-    const email = body.email_student;
+    const id = await Crud.Create<IStudentCreate>(body, 'student')
     const refreshTokens = [];
-    const accessToken = generateAccessToken(email);
-    const refreshToken = sign({ sub: email }, process.env.REFRESH_TOKEN_SECRET!)
+    const accessToken = generateAccessToken(id);
+    const refreshToken = sign({ sub: id }, process.env.REFRESH_TOKEN_SECRET!)
     refreshTokens.push(refreshToken)
     return {"accessToken" : accessToken}
     // else
@@ -34,6 +33,6 @@ export class CreateController {
   }
 }
 
-function generateAccessToken(email: any) {
-  return sign({ sub: email }, process.env.ACCESS_TOKEN_SECRET!, { expiresIn: '24h' })
+function generateAccessToken(id: any) {
+  return sign({ sub: id }, process.env.ACCESS_TOKEN_SECRET!, { expiresIn: '24h' })
 }
