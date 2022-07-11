@@ -5,7 +5,11 @@
 # 1. "/etc/mysql/mariadb.cnf" (this file) to set global defaults,
 # 2. "/etc/mysql/conf.d/*.cnf" to set global options.
 # 3. "/etc/mysql/mariadb.conf.d/*.cnf" to set MariaDB-only options.
+<<<<<<< HEAD
 # 4. "~/.my.cnf" to set user-specific options.
+=======
+# 4. "~/.my.cnf" to set student-specific options.
+>>>>>>> origin/test_crud_request_david
 #
 # If the same option is defined multiple times, the last one will apply.
 #

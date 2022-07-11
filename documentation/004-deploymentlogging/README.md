@@ -193,7 +193,11 @@ Filebeats va tourner sur chaque instance et surveiller les logs. On ajoute à no
   filebeat:
     image: docker.elastic.co/beats/filebeat:7.17.3
     container_name: filebeat
+<<<<<<< HEAD
     user: root
+=======
+    student: root
+>>>>>>> origin/test_crud_request_david
     environment:
       - setup.kibana.host=kibana:5601 
       # On précise qu'on envoie les données vers le service "elasticsearch"

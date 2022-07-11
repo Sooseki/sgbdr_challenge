@@ -44,7 +44,11 @@ Voici le morceau de [`docker-compose.dev.yml`](./docker-compose.dev.yml) qui a c
 ## Un schema de nos données en TypeScript
 
 * [Liste de tables](../../src/types/tables/tables.d.ts)
+<<<<<<< HEAD
 * [Schema de la table user](../../src/types/tables/user/IUser.d.ts)
+=======
+* [Schema de la table student](../../src/types/tables/student/IStudent.d.ts)
+>>>>>>> origin/test_crud_request_david
 
 
 ## Refactoring de notre class utilitaire `Crud.ts`
@@ -58,13 +62,21 @@ Voici le morceau de [`docker-compose.dev.yml`](./docker-compose.dev.yml) qui a c
 
 Un exemple avec [AJV](https://github.com/ajv-validator/ajv)
 
+<<<<<<< HEAD
 * [Validation de l'utilisateur avec avg](../../src/types/tables/user/user.validator.ts)
+=======
+* [Validation de l'utilisateur avec avg](../../src/types/tables/student/student.validator.ts)
+>>>>>>> origin/test_crud_request_david
 * [Passer une validateur optional à Crud.ts](../../src/classes/Crud.ts)
 
 ## Refactoring extreme
 
 * [Une fonction qui créer des `Routers` Express à partir d'une définition](../../src/classes/CrudRouter.ts)
+<<<<<<< HEAD
 * [Exemple d'usage de cette fonction](../../src/routes/auth/user.ts)
+=======
+* [Exemple d'usage de cette fonction](../../src/routes/auth/student.ts)
+>>>>>>> origin/test_crud_request_david
 
 ## Gestion d'erreurs
 

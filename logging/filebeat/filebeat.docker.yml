@@ -20,7 +20,7 @@ processors:
 
 output.elasticsearch:
   hosts: 'elasticsearch:9200'
-  username: 'elastic'
+  studentname: 'elastic'
   password: 'changeme'
   indices:
     - index: "filebeat-%{[agent.version]}-%{+yyyy.MM.dd}"
