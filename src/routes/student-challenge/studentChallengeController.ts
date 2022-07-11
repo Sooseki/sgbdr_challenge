@@ -1,10 +1,10 @@
-import Connection from 'mysql2/typings/mysql/lib/Connection';
 import { Body, Delete, Get, Path, Post, Put, Query, Route, Security } from 'tsoa';
 import { Crud } from '../../classes/Crud';
 import { ICreateResponse } from '../../types/api/ICreateResponse';
 import { IIndexResponse } from '../../types/api/IIndexQuery';
 import { IUpdateResponse } from '../../types/api/IUpdateResponse';
 import { IStudentChallenge, IStudentChallengeCreate } from '../../types/tables/student-challenge/IStudentChallenge';
+import { Connexion } from '../../challenge/connexion';
 
 const READ_COLUMNS = ['id_student', 'id_challenge', 'mark_student_challenge'];
 const TEST = ['student_challenge.id_student', 'student_challenge.id_challenge', 'student_challenge.mark_student_challenge', 'name_student'];
@@ -37,7 +37,8 @@ export class StudentChallengeController {
   public async createStudentChallenge(
     @Body() body: IStudentChallengeCreate
   ): Promise<ICreateResponse> {
-    console.log(body)
+    console.log(body);
+    console.log('nocrudnocrudnocrudnocrudnocrudnocrud')
     return Crud.Create<IStudentChallengeCreate>(body, 'student_challenge');
   }
 
@@ -49,7 +50,7 @@ export class StudentChallengeController {
     @Path() id_student_challenge: number,
   ): Promise<IStudentChallenge> {
     const bddRequest = Crud.Read<IStudentChallenge>('student_challenge', 'id_student_challenge', id_student_challenge, TEST, JOIN_TABLES ,JOIN_COLUMNS);
-    const testRequest = new Connection();
+    const testRequest = new Connexion();
     return bddRequest;
   }
 

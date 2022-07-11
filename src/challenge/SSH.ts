@@ -77,17 +77,13 @@ export class SSH {
   }
 
   static async MysqlConnect(sqlUser: string, sqlPass: string) {
-    return await createConnection({
+    return createConnection({
       user: sqlUser,
       password: sqlPass,
       database: 'nutrition',
       port: 3306,
       stream: this.stream
-    }).catch(err => {
-      // 'Error: Access denied for user 'challenger'@'172.18.0.1' (using password: YES)' - wrong user / password
-      this.connectionError = err;
-      return err;
-    });
+    })
   }
 
   static Close() {

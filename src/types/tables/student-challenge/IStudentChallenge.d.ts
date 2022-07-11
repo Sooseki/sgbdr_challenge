@@ -11,6 +11,6 @@
     
   }
   
-  export type IStudentChallengeCreate = IStudentChallenge;
+  export type IStudentChallengeCreate = Omit<IStudentChallenge, 'id_student'>;
 //   export type IStudentUpdate = Partial<IStudentCreate>;
 //   export type IStudentRO = Readonly<IStudent>;
