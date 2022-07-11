@@ -40,13 +40,13 @@ export class StudentChallengeController {
   }
 
   /**
-   * Récupérer une étudiant  avec le ID passé dans le URL
+   * Récupérer un étudiant  avec le ID passé dans le URL
    */
   @Get('{id_student_challenge}')
   public async readStudent(
-    @Path() id_challenge: number,
+    @Path() id_student_challenge: number,
   ): Promise<IStudentChallenge> {
-    return Crud.Read<IStudentChallenge>('student_challenge', 'id_student_challenge',  id_challenge, TEST, JOIN_TABLES ,JOIN_COLUMNS);
+    return Crud.Read<IStudentChallenge>('student_challenge', 'id_challenge', id_student_challenge, TEST, JOIN_TABLES ,JOIN_COLUMNS);
   }
 
   /**
