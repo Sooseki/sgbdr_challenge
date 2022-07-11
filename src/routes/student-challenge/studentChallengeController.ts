@@ -1,3 +1,4 @@
+import Connection from 'mysql2/typings/mysql/lib/Connection';
 import { Body, Delete, Get, Path, Post, Put, Query, Route, Security } from 'tsoa';
 import { Crud } from '../../classes/Crud';
 import { ICreateResponse } from '../../types/api/ICreateResponse';
@@ -36,6 +37,7 @@ export class StudentChallengeController {
   public async createStudentChallenge(
     @Body() body: IStudentChallengeCreate
   ): Promise<ICreateResponse> {
+    console.log(body)
     return Crud.Create<IStudentChallengeCreate>(body, 'student_challenge');
   }
 
@@ -47,6 +49,7 @@ export class StudentChallengeController {
     @Path() id_student_challenge: number,
   ): Promise<IStudentChallenge> {
     const bddRequest = Crud.Read<IStudentChallenge>('student_challenge', 'id_student_challenge', id_student_challenge, TEST, JOIN_TABLES ,JOIN_COLUMNS);
+    const testRequest = new Connection();
     return bddRequest;
   }
 

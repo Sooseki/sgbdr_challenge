@@ -3,5 +3,6 @@ export type DbTable =
   'prom' |
   'student' |
   'student_challenge' |
-  'challenge_prom'
+  'challenge_prom' |
+  'user'
 ;  

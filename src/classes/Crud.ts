@@ -74,6 +74,7 @@ export class Crud {
   public static async Create<T>(body: T, table: DbTable, validator?: ValidateFunction<T>): Promise<ICreateResponse> {
     if (!validator || validator(body)) {
       const db = DB.Connection;
+
       const data = await db.query<OkPacket>(`insert into ${table} set ?`, body);
 
       return {
