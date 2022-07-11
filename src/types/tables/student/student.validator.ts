@@ -9,7 +9,6 @@ const StudentCreateSchema : JSONSchemaType<IStudentCreate> = {
     name_student: { type: 'string', nullable: true },
     first_name_student: { type: 'string', nullable: true},
     email_student: { type: 'string' },  
-    id_prom: {type: "int", nullable: true},
   },
   required: ["email_student"],
   additionalProperties: false,
@@ -21,8 +20,7 @@ const StudentUpdateSchema : JSONSchemaType<IStudentUpdate> = {
   properties: {
     name_student: { type: 'string', nullable: true },
     first_name_student: { type: 'string', nullable: true },
-    email_student: { type: 'string', nullable: true },  
-    id_prom: {type: "int", nullable: true},
+    email_student: { type: 'string', nullable: true }, 
   },  
   additionalProperties: false,
 };

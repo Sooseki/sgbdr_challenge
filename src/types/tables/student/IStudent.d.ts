@@ -12,8 +12,6 @@ export interface IStudent {
   first_name_student?: string;
   /** Adress e-mail, ceci doit être unique est sera utilisé comme identifiant pour l'utilisateur */
   email_student: string;
-
-  id_prom: number ;
 }
 
 export type IStudentCreate = Omit<IStudent, 'student'>;

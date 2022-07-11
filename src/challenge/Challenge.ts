@@ -1,19 +1,15 @@
-type Question = {
-  id: number,
-  points: number,
-  clue: string | null,
-  name: string,
-  query: string,
-  check: any[],
-  error: string[]
-};
+import { Question } from './question';
 
 export class Challenge {
   static retrieveQueries(challenge: Question[]) {
-    let queries: string[] = [];
+    let queries: (string | any[])[] = [];
+    let n = 0;
 
     challenge.map((question: Question) => {
-      queries.push(question.query);
+      queries[n] = [question.query, question.check];
+      n++;
+      console.log('---------------------------------------')
+      console.log(queries);
     })
 
     return queries;

@@ -5,11 +5,10 @@
       "points": 1,
       "name": "bla bla",
       "clue": "bla bla",
-      "query": "SELECT count(id) from Repas",
-      "check": [
-        "==",
-        1245
-      ],
+      "query": "SELECT count(id) as count from Repas",
+      "check_value": "count",
+      "operator": "==",
+      "answer": "838915",
       "error": [
         "bla bla bla"
       ]
@@ -19,11 +18,23 @@
       "points": 2,
       "name": "bla bla",
       "clue": "bla bla",
+      "query": "SELECT count(id_chic) as count from Emotions",
+      "check_value": "count",
+      "operator": "==",
+      "answer": "838915",
+      "error": [
+        "bla bla bla"
+      ]
+    },
+    {
+      "id": 3,
+      "points": 2,
+      "name": "bla bla",
+      "clue": "bla bla",
       "query": "SELECT id from Emotions",
-      "check": [
-        "==",
-        1245
-      ],
+      "check_value": "count",
+      "operator": "==",
+      "answer": "838915",
       "error": [
         "bla bla bla"
       ]

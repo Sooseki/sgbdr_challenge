@@ -35,10 +35,8 @@ export class StudentChallengeController {
    */
   @Post()
   public async createStudentChallenge(
-    @Body() body: IStudentChallengeCreate
+    @Body() body: any
   ): Promise<ICreateResponse> {
-    console.log(body);
-    console.log('nocrudnocrudnocrudnocrudnocrudnocrud')
     return Crud.Create<IStudentChallengeCreate>(body, 'student_challenge');
   }
 
@@ -51,6 +49,11 @@ export class StudentChallengeController {
   ): Promise<IStudentChallenge> {
     const bddRequest = Crud.Read<IStudentChallenge>('student_challenge', 'id_student_challenge', id_student_challenge, TEST, JOIN_TABLES ,JOIN_COLUMNS);
     const testRequest = new Connexion();
+    const connexion = await testRequest.connect();
+    const std = await testRequest.getStandard();
+    console.log('--------------------')
+    console.log(std)
+    console.log('--------------------')
     return bddRequest;
   }
 

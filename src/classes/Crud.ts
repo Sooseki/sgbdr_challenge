@@ -72,22 +72,14 @@ export class Crud {
   }
 
   public static async Create<T>(body: T, table: DbTable, validator?: ValidateFunction<T>): Promise<ICreateResponse> {
-    console.log(body);
-    console.log('-------------------------------------');
     if (!validator || validator(body)) {
-      console.log('in validator');
       const db = DB.Connection;
-
       const data = await db.query<OkPacket>(`insert into ${table} set ?`, body);
-
-      console.log('-------------------------------------');
-      console.log(data);
       return {
         id: data[0].insertId
       }
     } else {
       // throw new ApiError(ErrorCode.BadRequest, 'validation/failed', 'Data did not pass validation', validator.errors);
-      console.log('oh no')
       throw new Error("to bad")
     }
   }
