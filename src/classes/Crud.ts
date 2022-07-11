@@ -111,15 +111,15 @@ export class Crud {
     if (joinTables && joinTablesColumns && joinTables.length == joinTablesColumns.length) {
 
       for (let i = 0; i < joinTables.length; i++) {
-        join += ` INNER JOIN ${joinTables[i][0]} ON ${joinTables[i][0]}.${joinTablesColumns[i][0]} == ${joinTables[i][1]}.${joinTablesColumns[i][1]}`
+        join += ` INNER JOIN ${joinTables[i][0]} ON ${joinTables[i][0]}.${joinTablesColumns[i][0]} = ${joinTables[i][1]}.${joinTablesColumns[i][1]}`
 
       }
     }
-
+    
     const data =
       await db.query<
         T[] & RowDataPacket[]
-      >(`select ${columns.join(',')} from ${table} ${join} where ${idName} = ?`);
+      >(`select ${columns.join(',')} from ${table} ${join} where ${idName} = ?`, [idValue]);
 
     if (data[0].length > 0) {
       return data[0][0];

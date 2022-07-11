@@ -46,7 +46,8 @@ export class StudentChallengeController {
   public async readStudent(
     @Path() id_student_challenge: number,
   ): Promise<IStudentChallenge> {
-    return Crud.Read<IStudentChallenge>('student_challenge', 'id_challenge', id_student_challenge, TEST, JOIN_TABLES ,JOIN_COLUMNS);
+    const bddRequest = Crud.Read<IStudentChallenge>('student_challenge', 'id_student_challenge', id_student_challenge, TEST, JOIN_TABLES ,JOIN_COLUMNS);
+    return bddRequest;
   }
 
   /**
