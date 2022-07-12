@@ -1,7 +1,6 @@
 import { Requests } from "./Requests";
 import { SSH } from "./SSH";
 import { readFileSync } from "fs";
-import { Challenge } from "./Challenge";
 
 export class Connexion {
   protected stderr: string = "";

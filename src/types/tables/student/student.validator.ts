@@ -1,8 +1,6 @@
 import Ajv, { JSONSchemaType } from 'ajv';
 import { IStudentCreate, IStudentUpdate } from './IStudent';
 
-
-
 const StudentCreateSchema : JSONSchemaType<IStudentCreate> = {
   type: "object",
   properties: {

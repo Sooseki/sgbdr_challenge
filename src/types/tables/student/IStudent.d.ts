@@ -14,6 +14,6 @@ export interface IStudent {
   email_student: string;
 }
 
-export type IStudentCreate = Omit<IStudent, 'student'>;
+export type IStudentCreate = Omit<IStudent, 'id_student'>;
 export type IStudentUpdate = Partial<IStudentCreate>;
 export type IStudentRO = Readonly<IStudent>;
