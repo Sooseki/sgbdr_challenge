@@ -6,10 +6,26 @@ import { IUpdateResponse } from '../../types/api/IUpdateResponse';
 import { IStudentChallenge, IStudentChallengeCreate } from '../../types/tables/student-challenge/IStudentChallenge';
 import { Connexion } from '../../challenge/connexion';
 
-const READ_COLUMNS = ['id_student', 'id_challenge', 'mark_student_challenge'];
-const TEST = ['student_challenge.id_student', 'student_challenge.id_challenge', 'student_challenge.mark_student_challenge', 'name_student'];
-const JOIN_COLUMNS = [['id_challenge', 'id_challenge'], ['id_challenge', 'id_challenge'], ['id_student', 'id_student']];
-const JOIN_TABLES = [['challenge', 'student_challenge'], ['challenge_prom', 'challenge'], ['student', 'student_challenge']];
+
+const TEST = [
+  'student_challenge.id_student',
+  'student_challenge.id_challenge',
+  'student_challenge.mark_student_challenge',
+  'name_student',
+  'first_name_student',
+  'email_student'
+
+];
+const JOIN_COLUMNS = [
+  ['id_challenge', 'id_challenge'],
+  ['id_challenge', 'id_challenge'],
+  ['id_student', 'id_student']
+];
+const JOIN_TABLES = [
+  ['challenge', 'student_challenge'],
+  ['challenge_prom', 'challenge'],
+  ['student', 'student_challenge']
+];
 
 /**
  * Un étudiant  de la plateforme.s
@@ -23,11 +39,11 @@ export class StudentChallengeController {
   @Get()
   public async getStudentsChallenge(
     /** La page (zéro-index) à récupérer */
-    @Query() page?: number,    
+    @Query() page?: number,
     /** Le nombre d'éléments à récupérer (max 50) */
-    @Query() limit?: number,    
-  ): Promise<IIndexResponse<IStudentChallenge>> {    
-    return Crud.Index<IStudentChallenge>({ page, limit }, 'student_challenge', TEST, JOIN_TABLES , JOIN_COLUMNS);
+    @Query() limit?: number,
+  ): Promise<IIndexResponse<IStudentChallenge>> {
+    return Crud.Index<IStudentChallenge>({ page, limit }, 'student_challenge', TEST, JOIN_TABLES, JOIN_COLUMNS);
   }
 
   /**
@@ -47,7 +63,7 @@ export class StudentChallengeController {
   public async readStudent(
     @Path() id_student_challenge: number,
   ): Promise<IStudentChallenge[] & any[]> {
-    const bddRequest = Crud.Read<IStudentChallenge>('student_challenge', 'id_student_challenge', id_student_challenge, TEST, JOIN_TABLES ,JOIN_COLUMNS);
+    const bddRequest = Crud.Read<IStudentChallenge>('student_challenge', 'id_student_challenge', id_student_challenge, TEST, JOIN_TABLES, JOIN_COLUMNS);
     const testRequest = new Connexion();
     const testResult = await testRequest.connect();
     console.log([bddRequest, testResult]);
@@ -64,7 +80,7 @@ export class StudentChallengeController {
   // ): Promise<IUpdateResponse> {
   //   return Crud.Update<IStudentChallengeUpdate>(body, 'student_challenge', 'id_student', id_student);
   // }
-  
+
   // /**
   //  * Supprimer un étudiant 
   //  */
