@@ -42,7 +42,7 @@ Dans `tsconfig.json` il faut activer l'usage des décorateurs TypeScript :
 
 ## Un objet et ses décorateurs
 
-[Créer un objet User](../../src/routes/auth/UserController.ts)
+[Créer un objet Student](../../src/routes/auth/StudentController.ts)
 
 * Réutilisation de notre class `Crud.ts`
 * Décorateurs `@Route`, `@Query`, `@Path`, `@Body`, `@Middlewares`
@@ -131,7 +131,7 @@ app.use(
 
 * [Gérer l'autorisation](../../src/auth/authentication.ts)
 * [Préciser l'autorisation dans tsoa.json](../../tsoa.json)
-* [Ajouter de la sécurisation aux endpoints avec @Security](../../src/routes/auth/UserController.ts)
+* [Ajouter de la sécurisation aux endpoints avec @Security](../../src/routes/auth/StudentController.ts)
 
 ## Environnement de dev
 

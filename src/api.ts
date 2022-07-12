@@ -1,4 +1,4 @@
-import Express, { json, Router } from "express";
+import Express, { json } from "express";
 import swaggerUi from "swagger-ui-express";
 import { requestLogMiddleware } from './classes/Logging/LoggingMiddleware';
 import { DefaultErrorHandler } from './middleware/error-handler';
@@ -33,6 +33,7 @@ app.use(
     },
   })
 );
+
 
 // Lancer le serveur
 app.listen(PORT,
