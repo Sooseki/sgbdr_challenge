@@ -1,6 +1,6 @@
 {
   "name": "boilerplate-api",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "description": "Boilerplate api project with nodejs",
   "main": "index.js",
   "directories": {
@@ -12,8 +12,7 @@
     "clean": "rimraf build",
     "build": "npm run clean && npm run swagger && tsc && copyfiles public/**/* build/",
     "start-api": "node ./build/api.js",
-    "connect-ssh": "ts-node ./src/challenge/connexion.ts",
-    "tests": "node ./build/challenge/tests.js"
+    "connect-ssh": "node ./build/challenge/connexion.js"
   },
   "repository": {
     "type": "git",
@@ -23,22 +22,22 @@
   "license": "ISC",
   "dependencies": {
     "@aws-sdk/client-s3": "^3.92.0",
-    "@types/ssh2": "^0.5.52",
-    "@types/tunnel-ssh": "^4.1.1",
     "ajv": "^8.11.0",
+    "dotenv": "^16.0.1",
     "express": "~4.18",
+    "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
     "multer": "^1.4.4",
     "mysql2": "^2.3.3",
     "ssh2": "^1.10.0",
     "swagger-ui-express": "^4.4.0",
     "tsoa": "^4.0.0",
-    "tunnel-ssh": "^4.1.6",
     "uuid": "^8.3.2",
     "winston": "^3.7.2"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
+    "@types/jsonwebtoken": "^8.5.8",
     "@types/morgan": "^1.9.3",
     "@types/multer": "^1.4.7",
     "@types/swagger-ui-express": "^4.1.3",

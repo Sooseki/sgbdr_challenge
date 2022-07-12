@@ -1,5 +1,7 @@
 export type DbTable = 
-  'user' |
-  'user_file' |
-  'film'
+  'challenge' |
+  'prom' |
+  'student' |
+  'student_challenge' |
+  'student'
 ;  
