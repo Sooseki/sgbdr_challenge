@@ -6,7 +6,7 @@ export class Challenge {
     let n = 0;
 
     challenge.map((question: Question) => {
-      queries[n] = [question.query, question.check];
+      queries[n] = [question.query, question.answer];
       n++;
       console.log('---------------------------------------')
       console.log(queries);

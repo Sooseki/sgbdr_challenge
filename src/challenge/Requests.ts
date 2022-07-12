@@ -1,5 +1,8 @@
-import { Connection } from "mysql2/promise";
+import { Connection, RowDataPacket } from "mysql2/promise";
+import { rejections } from "winston";
 import { Question } from "./question";
+import { IStudentChallenge } from '../types/tables/student-challenge/IStudentChallenge';
+import { ListBucketIntelligentTieringConfigurationsCommand } from "@aws-sdk/client-s3";
 
 export class Requests {
 
@@ -15,13 +18,20 @@ export class Requests {
     }));
   }
 
-  static async checkRequests(challenge: [], connection: Connection) {
-    console.log(challenge);
-    return await Promise.all(challenge.map(async (question: Question) => {
-      const test1 = await connection.query(question.query);
-      console.log(test1[0]);
-      // if(test1[0] == question.answer)
-      return true;
-    }));
+  static async checkRequests(challenge: Question[], connection: Connection) {
+    let points = 0;
+    for (const question of challenge) {
+
+      const result = await connection.query<any[] & RowDataPacket[]>(question.query);
+      const value = result[0][0][question.check_value];
+
+      if(question.answer !== value) {
+        return [question, points];
+      }
+
+      points += question.points;
+    }
+
+    return [true, 20];
   }
 }
