@@ -11,10 +11,10 @@ export class Connexion {
   protected db_pass: string;
 
   constructor(
-    ip: string = "212.47.249.198",
-    user: string = "challenge",
-    db_user: string = "challenge",
-    db_pass: string = "challenge"
+    ip: string,
+    user: string,
+    db_user: string,
+    db_pass: string
   ) {
     this.ip = ip;
     this.user = user;

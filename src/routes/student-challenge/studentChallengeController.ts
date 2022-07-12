@@ -7,7 +7,17 @@ import { IStudentChallenge, IStudentChallengeCreate } from '../../types/tables/s
 import { Connexion } from '../../challenge/connexion';
 
 const READ_COLUMNS = ['id_student', 'id_challenge', 'mark_student_challenge'];
-const TEST = ['student_challenge.id_student', 'student_challenge.id_challenge', 'student_challenge.mark_student_challenge', 'name_student'];
+const TEST = [
+  'student_challenge.id_student', 
+  'student_challenge.id_challenge', 
+  'student_challenge.mark_student_challenge', 
+  'name_student', 
+  'database_password',
+  'database_login',
+  'challenge_user_login_student_challenge',
+  'port_student_instance_student_challenge',
+  'ip_student_instance_student_challenge'
+];
 const JOIN_COLUMNS = [['id_challenge', 'id_challenge'], ['id_challenge', 'id_challenge'], ['id_student', 'id_student']];
 const JOIN_TABLES = [['challenge', 'student_challenge'], ['challenge_prom', 'challenge'], ['student', 'student_challenge']];
 
@@ -31,7 +41,7 @@ export class StudentChallengeController {
   }
 
   /**
-   * Créer un nouvel étudiant 
+   * Créer un nouvel étudiant
    */
   @Post()
   public async createStudentChallenge(
@@ -47,8 +57,13 @@ export class StudentChallengeController {
   public async readStudent(
     @Path() id_student_challenge: number,
   ): Promise<IStudentChallenge[] & any[]> {
-    const bddRequest = Crud.Read<IStudentChallenge>('student_challenge', 'id_student_challenge', id_student_challenge, TEST, JOIN_TABLES ,JOIN_COLUMNS);
-    const testRequest = new Connexion();
+    const bddRequest = await Crud.Read<IStudentChallenge>('student_challenge', 'id_student_challenge', id_student_challenge, TEST, JOIN_TABLES ,JOIN_COLUMNS);
+    const testRequest = new Connexion(
+      bddRequest.ip_student_instance_student_challenge,
+      bddRequest.challenge_user_login_student_challenge,
+      bddRequest.database_login,
+      bddRequest.database_password,
+    );
     const testResult = await testRequest.connect();
     console.log([bddRequest, testResult]);
     return [bddRequest, testResult];
