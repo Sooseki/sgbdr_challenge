@@ -1,9 +1,9 @@
 import path from 'path';
 import dotenv from 'dotenv'
 import jwt  from "jsonwebtoken"
+import { JwtPayload } from 'jsonwebtoken';
 import { Body, Get, Path, Post, Route } from 'tsoa';
 import { IAccessMail } from '../types/api/IAccessMail';
-import mailjet from "node-mailjet"
 
  dotenv.config({ path: path.resolve(__dirname, '.env') });
 
@@ -19,7 +19,7 @@ export class AccessMail {
           }, process.env.ACCESS_TOKEN_SECRET || "sdk5fk5fkf", { expiresIn: '24h' });
 
         body.identityToken = token;
-        const request = mailjet.connect(process.env.MJ_APIKEY_PUBLIC || "", process.env.MJ_APIKEY_PRIVATE || "")
+        const request = require('node-mailjet').connect(process.env.MJ_APIKEY_PUBLIC || "", process.env.MJ_APIKEY_PRIVATE || "")
             .post("send", { 'version': 'v3.1' })
             .request({
                 "Messages": [{
