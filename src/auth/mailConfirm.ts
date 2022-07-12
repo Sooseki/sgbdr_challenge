@@ -10,10 +10,16 @@ import { IAccessMail } from '../types/api/IAccessMail';
 /**
  * Envoie d'un email avec génération d'un token d'accès.
  */
+
+
 @Route("/auth")
 export class AccessMail {
+    
     @Post('/email')
-    public async sendMail(@Body() body: IAccessMail): Promise<IAccessMail> {
+    public async sendMail(
+        @Body() body: IAccessMail
+    ): Promise<IAccessMail> {
+        
         const token = jwt.sign({
             data: body.email
           }, process.env.ACCESS_TOKEN_SECRET || "sdk5fk5fkf", { expiresIn: '24h' });
@@ -28,8 +34,8 @@ export class AccessMail {
                         "Name": "API Node"
                     },
                     "To": [{
-                        "Email": body.email,
-                        "Name": body.email
+                        "Email": 'alexp90300@gmail.com',
+                        "Name": 'ablblbl'
                     }],
                     "Subject": "Link challenge",
                     "TextPart": `Your link for the challenge http://localhost:3000/verify?token=${body.identityToken}`
