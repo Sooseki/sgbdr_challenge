@@ -57,59 +57,7 @@ services:
         max-file: "5"
         max-size: "500m"
 
-  
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.3
-    container_name: elasticsearch
-    environment:
-      - discovery.type=single-node
-      - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      - ELASTIC_PASSWORD=changeme
-      - xpack.security.enabled=true
-    volumes:
-      - ./stage/logs/elasticsearch_data:/usr/share/elasticsearch/data
-    ports:
-      - 9200:9200
-    networks:
-      - api-stage-logging
-
-  kibana:
-    image: docker.elastic.co/kibana/kibana:7.17.3
-    container_name: kibana
-    environment:
-      - ELASTICSEARCH_USERNAME=elastic
-      - ELASTICSEARCH_PASSWORD=changeme
-      - ELASTICSEARCH_URL=http://elasticsearch:9200
-      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
-    ports:
-      - 5601:5601
-    depends_on:
-      - elasticsearch
-    networks:
-      - api-stage-logging
-
-  filebeat:
-    image: docker.elastic.co/beats/filebeat:7.17.3
-    container_name: filebeat
-    student: root
-    environment:
-      - setup.kibana.host=kibana:5601 
-      - output.elasticsearch.hosts=["elasticsearch:9200"]
-    volumes:
-      - ./logging/filebeat/filebeat.docker.yml:/usr/share/filebeat/filebeat.yml:ro
-      - /var/lib/docker/containers:/var/lib/docker/containers:ro
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    depends_on:
-      - elasticsearch
-    networks:
-      - api-stage-logging
-
-
-
 
 networks:
   api-stage-network:
-    driver: bridge
-  api-stage-logging:
     driver: bridge
