@@ -3,7 +3,7 @@ import { Crud } from '../../classes/Crud';
 import { ICreateResponse } from '../../types/api/ICreateResponse';
 import { IIndexResponse } from '../../types/api/IIndexQuery';
 import { IUpdateResponse } from '../../types/api/IUpdateResponse';
-import { IStudentChallenge, IStudentChallengeCreate } from '../../types/tables/student-challenge/IStudentChallenge';
+import { IStudentChallenge, IStudentChallengeConnect, IStudentChallengeCreate } from '../../types/tables/student-challenge/IStudentChallenge';
 import { Connexion } from '../../challenge/connexion';
 
 const TEST = [
@@ -55,8 +55,8 @@ export class StudentChallengeController {
   @Get('{id_student_challenge}')
   public async readStudent(
     @Path() id_student_challenge: number,
-  ): Promise<IStudentChallenge[] & any[]> {
-    const bddRequest = await Crud.Read<IStudentChallenge>('student_challenge', 'id_student_challenge', id_student_challenge, TEST, JOIN_TABLES ,JOIN_COLUMNS);
+  ): Promise<any> {
+    const bddRequest = await Crud.Read<IStudentChallengeConnect>('student_challenge', 'id_student_challenge', id_student_challenge, TEST, JOIN_TABLES ,JOIN_COLUMNS);
     const testRequest = new Connexion(
       bddRequest.ip_student_instance_student_challenge,
       bddRequest.challenge_user_login_student_challenge,
