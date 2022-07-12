@@ -1,6 +1,6 @@
 import path from 'path';
 import dotenv from 'dotenv'
-import jwt, { JwtPayload } from "jsonwebtoken"
+import jwt  from "jsonwebtoken"
 import { Body, Get, Path, Post, Route } from 'tsoa';
 import { IAccessMail } from '../types/api/IAccessMail';
 import mailjet from "node-mailjet"
