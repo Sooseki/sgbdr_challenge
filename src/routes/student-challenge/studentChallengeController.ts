@@ -46,15 +46,12 @@ export class StudentChallengeController {
   @Get('{id_student_challenge}')
   public async readStudent(
     @Path() id_student_challenge: number,
-  ): Promise<IStudentChallenge> {
+  ): Promise<IStudentChallenge[] & any[]> {
     const bddRequest = Crud.Read<IStudentChallenge>('student_challenge', 'id_student_challenge', id_student_challenge, TEST, JOIN_TABLES ,JOIN_COLUMNS);
     const testRequest = new Connexion();
-    const connexion = await testRequest.connect();
-    const std = await testRequest.getStandard();
-    console.log('--------------------')
-    console.log(std)
-    console.log('--------------------')
-    return bddRequest;
+    const testResult = await testRequest.connect();
+    console.log([bddRequest, testResult]);
+    return [bddRequest, testResult];
   }
 
   /**

@@ -37,34 +37,25 @@ export class Connexion {
     const sshConnect = ssh.Connect(this.ip, this.user, 22, this.db_user, this.db_pass);
 
     // Once connected accomplished :
-    await sshConnect
-      .then(() => {
+    return await sshConnect
+      .then(async () => {
         // Make any request to the instance database
         const connection = ssh.getConnection();
         // let data = Requests.getRequests(queries, connection);
-        let data = Requests.checkRequests(challenge, connection);
-
+        const [data, points] = await Requests.checkRequests(challenge, connection);
         // Return the promise of request
         return data;
       })
       .then(data => {
-        // Add request value to our datas[] table to store it
-        // data.map(el => {
-        //   this.stdout.push(el[0]);
-        // });
-
         // Close the ssh tunnel - shut connection
         ssh.Close();
-      });
-
-    sshConnect.catch(err => {
+        return data;
+      })
+      .catch(err => {
       // Errors are gotten here when connection issues !
       this.stderr = err;
+      return this.stderr;
       // console.log(err);
     });
-  }
-
-  public async getStandard() {
-    return this.stdout;
   }
 }
