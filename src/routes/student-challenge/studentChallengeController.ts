@@ -10,6 +10,8 @@ const TEST = [
   'student_challenge.id_student', 
   'student_challenge.id_challenge', 
   'student_challenge.mark_student_challenge', 
+  'email_student',
+  'first_name_student',
   'name_student', 
   'database_password',
   'database_login',

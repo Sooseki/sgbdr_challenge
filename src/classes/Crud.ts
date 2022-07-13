@@ -35,7 +35,7 @@ export class Crud {
     // non-numérique, ou corrompu
     const page = Math.max(query.page || 0, 0);
     // Toujours limiter la tailles des pages à 50 lignes
-    const limit = Math.min(query.limit || 0, 50) || 30;
+    const limit = Math.min(query.limit || 0, 9) || 9;
     const offset = page * limit;
 
     // D'abord, récupérer le nombre total

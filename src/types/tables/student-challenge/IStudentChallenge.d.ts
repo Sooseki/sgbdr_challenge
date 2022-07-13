@@ -5,6 +5,7 @@
  */
 export interface IStudentChallenge {
   name_student?: string;
+  first_name_student ?: string;
   email_student?: string;
   id_student?: number;
   id_challenge?: number;
@@ -18,6 +19,7 @@ export interface IStudentChallenge {
 
 export interface IStudentChallengeConnect {
   name_student?: string;
+  first_name_student ?: string;
   email_student?: string;
   id_student?: number;
   id_challenge?: number;
