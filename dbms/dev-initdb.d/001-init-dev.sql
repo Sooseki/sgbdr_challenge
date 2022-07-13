@@ -6,7 +6,7 @@ notre script réutilisable dans le future, même si la base existe déjà
 create database IF NOT EXISTS mtdb;
 
 /* Créer l'utilisateur API */
-create user IF NOT EXISTS 'api-dev'@'%.%.%.%' identified by 'api-dev-password';
+create student IF NOT EXISTS 'api-dev'@'%.%.%.%' identified by 'api-dev-password';
 grant select, update, insert, delete on mtdb.* to 'api-dev'@'%.%.%.%';
 flush privileges;
 

@@ -1,30 +1,30 @@
 
-/* user */
-create table if not exists user (
-  userId int auto_increment not null,
-  email varchar(256) unique not null, 
-  familyName varchar(256), 
-  givenName varchar(256), 
-  primary key(userId)
+/* student */
+create table if not exists student (
+  id_student int auto_increment not null,
+  email_student varchar(256) unique not null, 
+  name_student varchar(256), 
+  first_name_student varchar(256), 
+  primary key(id_student)
 );
 
 
-drop trigger if exists before_insert_user;
+drop trigger if exists before_insert_student;
 
-create trigger before_insert_user
+create trigger before_insert_student
 before insert
-on user for each row set new.email = lower(trim(new.email));
+on student for each row set new.email_student = lower(trim(new.email_student));
 
 
 /* file */
-create table if not exists user_file (
+create table if not exists student_file (
   fileId int auto_increment not null,
-  userId int not null,
+  id_student int not null,
   storageKey varchar(512) not null,
   filename varchar(256),
   mimeType varchar(256),
   primary key(fileId),
-  foreign key(userId) references user(userId) on delete cascade
+  foreign key(id_student) references student(id_student) on delete cascade
 );
 
 /* exemple */

@@ -15,7 +15,7 @@ export const requestLogMiddleware = (tag: LogTag) => {
         return JSON.stringify({
           'tag': tag,
           'remote-address': tokens['remote-addr'](req, res),
-          'remote-user': '',    // TODO
+          'remote-student': '',    // TODO
           'time': tokens['date'](req, res, 'iso'),
           'method': tokens['method'](req, res),
           'url': tokens['url'](req, res),
@@ -23,7 +23,7 @@ export const requestLogMiddleware = (tag: LogTag) => {
           'status-code': tokens['status'](req, res),
           'content-length': tokens['res'](req, res, 'content-length'),
           'referrer': tokens['referrer'](req, res),
-          'user-agent': tokens['user-agent'](req, res),
+          'student-agent': tokens['student-agent'](req, res),
           'response-time': tokens['response-time'](req, res),          
         });
       } else {
