@@ -11,13 +11,14 @@ const READ_COLUMNS = ['id_student', 'name_student', 'first_name_student', 'email
  * Un étudiant  de la plateforme.s
  */
 @Route("/auth/student")
-@Security('jwt')
+
 export class StudentController {
 
   /**
    * Récupérer une page d'étudiant s.
    */
   @Get()
+  @Security('jwt')
   public async getStudents(
     /** La page (zéro-index) à récupérer */
     @Query() page?: number,    
@@ -31,6 +32,7 @@ export class StudentController {
    * Créer un nouvel étudiant 
    */
   @Post()
+  
   public async createStudent(
     @Body() body: IStudentCreate
   ): Promise<ICreateResponse> {
@@ -41,6 +43,7 @@ export class StudentController {
    * Récupérer une étudiant  avec le ID passé dans le URL
    */
   @Get('{id_student}')
+  @Security('jwt')
   public async readStudent(
     @Path() id_student: number
   ): Promise<IStudent> {
@@ -51,6 +54,7 @@ export class StudentController {
    * Mettre à jour un étudiant  avec le ID passé dans le URL
    */
   @Put('{id_student}')
+  @Security('jwt')
   public async updateStudent(
     @Path() id_student: number,
     @Body() body: IStudentUpdate
@@ -62,6 +66,7 @@ export class StudentController {
    * Supprimer un étudiant 
    */
   @Delete('{id_student}')
+  @Security('jwt')
   public async deleteStudent(
     @Path() id_student: number,
   ): Promise<IUpdateResponse> {

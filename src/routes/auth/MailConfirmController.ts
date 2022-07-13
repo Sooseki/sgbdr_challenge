@@ -38,7 +38,7 @@ export class MailConfirm {
                         "Name": body.email
                     }],
                     "Subject": "Link challenge",
-                    "TextPart": `Your link for the challenge http://localhost:3000/verify?token=${body.identityToken}`
+                    "TextPart": `Lien vers le challenge http://localhost:3000/verify?token=${body.identityToken}`
                 }]
             })
         request
@@ -49,9 +49,9 @@ export class MailConfirm {
     }
 
     @Get('/verify/{identityToken}')
-    public async getMail(
+    public async getMail (
         @Path() identityToken: string): Promise<string | JwtPayload> {
-        const decodedToken = jwt.verify(identityToken, process.env.ACCESS_TOKEN_SECRET || "maeKMdGKpxTSaBPa");
+        const decodedToken = jwt.verify(identityToken, process.env.ACCESS_TOKEN_SECRET || "");
         return decodedToken;
     }
 }
