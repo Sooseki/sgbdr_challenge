@@ -27,7 +27,10 @@ export class CreateController {
     const accessToken = generateAccessToken(id);
     const refreshToken = sign({ sub: id }, process.env.REFRESH_TOKEN_SECRET!)
     refreshTokens.push(refreshToken)
-    return {"accessToken" : accessToken}
+    return {
+      "accessToken" : accessToken,
+      "refreshToken" : refreshToken
+    }
     // else
     //return Crud.Create<IStudentCreate>(body, 'student');
   }
