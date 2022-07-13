@@ -64,7 +64,6 @@ export class StudentChallengeController {
       bddRequest.database_password,
     );
     const testResult = await testRequest.connect();
-    console.log([bddRequest, testResult]);
     return [bddRequest, testResult];
   }
 

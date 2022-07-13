@@ -31,8 +31,6 @@ export class CreateController {
       "accessToken" : accessToken,
       "refreshToken" : refreshToken
     }
-    // else
-    //return Crud.Create<IStudentCreate>(body, 'student');
   }
 }
 

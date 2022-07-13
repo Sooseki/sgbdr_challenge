@@ -45,11 +45,9 @@ export class SSH {
               };
               
               stream.on('close', (code: any, signal: any) => {
-                console.log('stream :: close\n', { code });
                 this.conn.end();
           
               }).stderr.on('data', (data: any) => {
-                console.log('STDERR: ' + data);
           
               });
 
