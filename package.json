@@ -10,7 +10,7 @@
     "api": "nodemon",
     "swagger": "tsoa spec-and-routes",
     "clean": "rimraf build",
-    "build": "npm run clean && npm run swagger && tsc && copyfiles public/**/* build/",
+    "build": "npm run clean && npm run swagger && tsc && copyfiles public/**/* build/ && copyfiles config/* build/",
     "start-api": "node ./build/api.js",
     "connect-ssh": "node ./build/challenge/connexion.js"
   },
