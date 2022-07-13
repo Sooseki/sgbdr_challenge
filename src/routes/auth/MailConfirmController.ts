@@ -6,8 +6,6 @@ import { Body, Get, Path, Post, Route } from 'tsoa';
 import { IAccessMail } from '../../types/api/IAccessMail';
 import { connect } from 'node-mailjet';
 
- dotenv.config({ path: path.resolve(__dirname, '.env') });
-
 /**
  * Envoie d'un email avec génération d'un token d'accès.
  */
