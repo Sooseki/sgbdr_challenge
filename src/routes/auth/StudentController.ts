@@ -11,7 +11,7 @@ const READ_COLUMNS = ['id_student', 'name_student', 'first_name_student', 'email
  * Un étudiant  de la plateforme.s
  */
 @Route("/auth/student")
-// @Security('jwt')
+@Security('jwt')
 export class StudentController {
 
   /**

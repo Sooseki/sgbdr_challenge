@@ -8,6 +8,6 @@ export interface IProm {
   year_prom?: number;
 }
 
-export type IPromCreate = Omit<IProm, 'id_prom'>;
+export type IPromCreate = Omit<IProm, 'id_prom '>;
 export type IPromUpdate = Partial<IPromCreate>;
 export type IPromRO = Readonly<IProm>;
