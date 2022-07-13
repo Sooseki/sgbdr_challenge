@@ -20,7 +20,7 @@ export class SSH {
   ) 
   {
 
-    return await new Promise((resolve, reject) => {
+    return await new Promise<Connection>((resolve, reject) => {
 
         this.conn.connect({
           host: ipAddress,

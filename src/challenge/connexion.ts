@@ -39,6 +39,7 @@ export class Connexion {
     // Once connected accomplished :
     return await sshConnect
       .then(async () => {
+        console.log(sshConnect)
         // Make any request to the instance database
         const connection = ssh.getConnection();
         // let data = Requests.getRequests(queries, connection);
@@ -52,10 +53,11 @@ export class Connexion {
         return data;
       })
       .catch(err => {
-      // Errors are gotten here when connection issues !
-      this.stderr = err;
-      return this.stderr;
-      // console.log(err);
-    });
+        console.log(sshConnect)
+        // Errors are gotten here when connection issues !
+        this.stderr = err;
+        return this.stderr;
+        // console.log(err);
+      });
   }
 }
