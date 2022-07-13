@@ -6,7 +6,7 @@ import { Body, Get, Path, Post, Route } from 'tsoa';
 import { IAccessMail } from '../../types/api/IAccessMail';
 import { connect } from 'node-mailjet';
 
-dotenv.config({ path: path.resolve(__dirname, '.env') });
+// dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 /**
  * Envoie d'un email avec génération d'un token d'accès.
@@ -38,7 +38,7 @@ export class MailConfirm {
                         "Name": body.email
                     }],
                     "Subject": "Link challenge",
-                    "TextPart": `Your link for the challenge http://localhost:3000/verify?token=${body.identityToken}`
+                    "TextPart": `Your link for the challenge https://dramm-sgbdr.herokuapp.com/verify?token=${body.identityToken}`
                 }]
             })
         request
